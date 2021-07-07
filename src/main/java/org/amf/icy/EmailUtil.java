@@ -59,7 +59,6 @@ public class EmailUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // TODO crzr
         return properties;
     }
 }

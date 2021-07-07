@@ -1,14 +1,13 @@
 package org.amf.icy;
 
-import javax.mail.Message;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.activation.DataHandler;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
@@ -55,7 +54,7 @@ public class HtmlEmail {
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(messageBodyPart);
 
-            
+
             // adds inline image attachments
             if (mapInlineImages != null && mapInlineImages.size() > 0) {
                 Set<String> setImageID = mapInlineImages.keySet();
@@ -64,17 +63,23 @@ public class HtmlEmail {
                     MimeBodyPart imagePart = new MimeBodyPart();
                     imagePart.setHeader("Content-ID", "<" + contentId + ">");
                     imagePart.setDisposition(MimeBodyPart.INLINE);
+                    imagePart.setDisposition(Part.ATTACHMENT);
 
                     String imageFilePath = mapInlineImages.get(contentId);
+                    URL url = HtmlEmail.class.getClassLoader().getResource(imageFilePath);
+
                     try {
-                        imagePart.attachFile(imageFilePath);
-                    } catch (IOException ex) {
+                        //imagePart.attachFile(imageFilePath);
+                        imagePart.setDataHandler(new DataHandler(url));
+
+                    } catch (Exception ex) {
                         ex.printStackTrace();
                     }
 
                     multipart.addBodyPart(imagePart);
                 }
             }
+
 
             msg.setContent(multipart);
             System.out.println("Message is ready");

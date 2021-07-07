@@ -41,12 +41,12 @@ public class SendEmail {
             body.append("Nabil AMEZIANE<br>");
             body.append("<font color=red>Data Geek</font><br>");
             body.append("<hr>");
-            body.append("<img src=\"cid:git\" width=\"15%\" height=\"15%\" /><br>");
+            body.append("<img src=\"cid:amf\" width=\"15%\" height=\"15%\" /><br>");
             body.append("<hr>");
             body.append("</html>");
 
             Map<String, String> inlineImages = new HashMap<String, String>();
-            inlineImages.put("git", "/mnt/c/Users/Nabil AMEZIANE/IdeaProjects/JavaMail/src/main/resources/git.png");
+            inlineImages.put("amf", "amf.jpg");
 
             HtmlEmail.sendEmail(session,
                     properties.getProperty("email.email_to"),
@@ -60,5 +60,3 @@ public class SendEmail {
         }
     }
 }
-
-

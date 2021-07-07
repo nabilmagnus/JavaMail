@@ -1,0 +1,5 @@
+org\amf\icy\SendEmail$1.class
+org\amf\icy\SendEmail.class
+org\amf\icy\HtmlEmail.class
+org\amf\icy\EmailUtil.class
+org\amf\icy\SimpleEmail.class
